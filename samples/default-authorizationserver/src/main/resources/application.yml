@@ -8,3 +8,13 @@ logging:
     org.springframework.security: INFO
     org.springframework.security.oauth2: INFO
 #    org.springframework.boot.autoconfigure: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mc?currentSchema=spring_authorization_server
+    username: PLACEHOLDER_USER
+    password: PLACEHOLDER_PASS
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
