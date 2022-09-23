@@ -23,6 +23,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -68,6 +71,17 @@ public class AuthorizationServerConfig {
 	@Bean
 	public AuthorizationServerSettings authorizationServerSettings() {
 		return AuthorizationServerSettings.builder().issuer("http://localhost:9000").build();
+	}
+
+	@Bean
+	public EmbeddedDatabase embeddedDatabase() {
+		// @formatter:off
+		return new EmbeddedDatabaseBuilder()
+				.generateUniqueName(true)
+				.setType(EmbeddedDatabaseType.H2)
+				.setScriptEncoding("UTF-8")
+				.build();
+		// @formatter:on
 	}
 
 }
